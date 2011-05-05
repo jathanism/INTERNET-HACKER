@@ -1,17 +1,199 @@
 #!/usr/bin/env python
+
 # !!!!!!!!!!!!!!!!!!! 0-DAY DO NOT DISTRIBUTE !!!!!!!!!!!!!!!!!!!!
 # THIS IS AN INTERNET HACKER PROGRAM, PLEASE USE WITH APPLE CARE
 # MR DA PLAGUE <sOcKeT@GmAiL.CoM>
+# MINICOM <JaTHaN@gGMaiL.CoM>
 
+__version__ = '1.5'
+__author__ = 'MR DA PLAGUE'
+
+import datetime
 import socket
 import struct
 import random
+import time
+import sys
 
-import time, sys, math
 
+################
+# Hacking Type #
+################
+#LOG_TYPE = 'HACKING INTERNET'
+LOG_TYPE = 'HAXORING'
+
+##################
+# Attack Methods #
+##################
+# These should be "descriptive"  words (aka adjectives)
+METHOD_PRE = (
+    'integrated',
+    'total',
+    'systematized',
+    'balanced',
+    'parallel',
+    'stealth',
+    'solid-state',
+    'mulching',
+    'xmas',
+    'malformed',
+    'slapper',
+    'king-kong',
+    'puffing',
+    'satellite',
+    'multiprocessing',
+    'multithreaded',
+)
+# These should be "business" words 
+METHOD_MID = (
+    'parcell',
+    'monitored',
+    'digital',
+    'logistical',
+    'quantum',
+    'penetrated',
+    'godzilla',
+    'policy',
+    'incremental'
+    'cloud',
+    'webscale',
+    'mapreduced',
+)
+# These should be "action" words"
+METHOD_END = (
+    'recon',
+    'detection',
+    'lookup',
+    'scan-method',
+    'poke',
+    'finger',
+    'junk-punch',
+    'hooker',
+    'probulator',
+    'finglonger',
+)
+
+#################
+# Service Names #
+#################
+# These should be "actual" services
+SERVICE_PRE = (
+    'internet',
+    'weblogic',
+    'id',
+    'web',
+    'ftp',
+    'xml',
+    'cloud',
+    'amazon',
+    'ebay',
+    'google'
+)
+# And these should just be ridiculous
+SERVICE_END = (
+    'badger',
+    'sucker',
+    'apache',
+    'napster',
+    'fungus',
+    'meat',
+)
+
+################
+# Action Names #
+################
+ACTIONS = (
+    'CALLING TAFT',
+    'LOGGING OFF IRC',
+    'MOVING FUNDS INTO SWISS BANK ACCOUNT',
+    'GAINING EYE OF THE TIGER',
+    'REBOOTING ROUTERS',
+    'USING PGP',
+    'HIDING',
+    'UPLOADING SPACE JAM', 
+    'EMPTYING TRASHCAN', 
+    'SENDING MSG_OOB', 
+    'CALCULATING SENDMAIL AXIS',
+    'MOUNTING FILESYSTEM READONLY',
+    'RETICULATING SPLINES',
+)
+
+#############
+# Fed Names #
+#############
+# Come on, be creative!
+FEDS = (
+    'FBI',
+    'CIA',
+    'RIAA',
+    'AOL',
+    'SWEDEN',
+    'MADD',
+    'UUNET',
+    'NAMBLA',
+    'WALMART',
+    'PETA',
+    'MPAA',
+    'CERN',
+    'NWA'
+)
+
+################
+# Kill Methods #
+################
+KILL_METHODS = ( 
+    'PING TIMED OUT',
+    'SHOT DOWN BY NORTH KOREA',
+    'EXPOSED BY WIKILEAKS',
+    'CALL TRACED AND EXPLODED',
+    'BLUESCREENED BY OVERHACK IDS LOCKING',
+    'TALK SESSION TERMINATED',
+    'ACCOUNT REMOVED BY COMPUSERVE',
+    'FIREWALLED FROM EGYPT',
+    'CONNECTION TIMED OUT',
+    'FIREWALL 60% GONE',
+    'HACKED BY CHINESE',
+)
+
+###########
+# Banners #
+###########
+TAG = 'VERSION {0} BY {1}'.format(__version__, __author__)
+BANNER = """
+ ___ _   _ _____ _____ ____  _   _ _____ _____ 
+|_ _| \ | |_   _| ____|  _ \| \ | | ____|_   _|
+ | ||  \| | | | |  _| | |_) |  \| |  _|   | |  
+ | || |\  | | | | |___|  _ <| |\  | |___  | |  
+|___|_| \_| |_| |_____|_| \_\_| \_|_____| |_|  
+                                               
+ _   _    _    __  _____  ____  
+| | | |  / \   \ \/ / _ \|  _ \ 
+| |_| | / _ \   \  / | | | |_) |
+|  _  |/ ___ \  /  \ |_| |  _ < 
+|_| |_/_/   \_\/_/\_\___/|_| \_\
+
+{tag}
+""".format(tag=TAG)
+
+OWNED = """
+  ___                 _____     _ 
+ / _ \__      ___ __ |___ /  __| |
+| | | \ \ /\ / / '_ \  |_ \ / _` |
+| |_| |\ V  V /| | | |___) | (_| |
+ \___/  \_/\_/ |_| |_|____/ \__,_|
+"""
+    
+
+# Classes
 class ProgressMeter(object):
-    #ESC = chr(27)
+    """
+    A progress meter. Duh.
+    """
     def __init__(self, **kw):
+        # What message do we want to display?
+        self.message = kw.get('message', '')
+        if self.message:
+            self.message += ' '
         # What time do we start tracking our progress from?
         self.timestamp = kw.get('timestamp', time.time())
         # What kind of unit are we tracking?
@@ -76,7 +258,9 @@ class ProgressMeter(object):
         bar = '-' * self.meter_value
         pad = ' ' * (self.meter_ticks - self.meter_value)
         perc = (float(self.count) / self.total) * 100
-        return '[%s>%s] %d%%  %.1f/sec' % (bar, pad, perc, self.rate_current)
+        message = self.message
+        #return '[%s>%s] %d%%  %.1f/sec' % (bar, pad, perc, self.rate_current)
+        return '%s[%s>%s] %d%%  %.1f/sec' % (message, bar, pad, perc, self.rate_current)
 
     def refresh(self, **kw):
         # Clear line and return cursor to start-of-line
@@ -100,197 +284,170 @@ class ProgressMeter(object):
         self.last_refresh = time.time()
 
 
-def detect_service(ip, port):
-    m1 = ['integrated', 'total', 'systematized', 'balanced', 'parallel',
-         'stealth', 'solid-state', 'mulching', 'xmas', 'malformed', 'slapper', 'king-kong', 'puffing']
-    m2 = ['parcell','monitored', 'digital', 'logistical', 'quantum','penetrated', 'godzilla',
-          'policy', 'incremental']
-    m3 = ['recon', 'detection', 'lookup', 'scan-method', 'poke', 'finger', 'junk-punch', 'hooker']
-
-    method = m1[random.randrange(0,len(m1))] + ' ' + \
-             m2[random.randrange(0,len(m2))] + ' ' + \
-             m3[random.randrange(0,len(m3))]
+# Functions
+def detect_service():
+    """
+    Generate a random attack method and service and go to town!
+    """
+    method = ' '.join(random.choice(m) for m in (METHOD_PRE, METHOD_MID, METHOD_END)) 
+    service = ' '.join(random.choice(s) for s in (SERVICE_PRE, SERVICE_END)) + ' daemon'
     
-    s1 = ['internet', 'weblogic', 'id', 'web', 'ftp', 'xml', 'cloud', 'amazon', 'ebay', 'google']
-    s2 = ['badger', 'sucker', 'apache', 'napster', 'fungus', 'meat']
+    return method, service
     
-    service = s1[random.randrange(0,len(s1))] + '-' + \
-              s2[random.randrange(0,len(s2))] + ' daemon'
-
-    return (method,service)
-    
-def log(type, msg):
-    from datetime import datetime, date, time, timedelta
-    if type == 'debug' and debug == 0:
-        return
-    if type == 'dev' and dev == 0:
-        return
-    ts = datetime.now()
-    print "%s [%s]: %s" % ( ts.ctime(), type, msg )
+def log(msg, log_type=LOG_TYPE):
+    ts = datetime.datetime.now()
+    print "%s [%s]: %s" % (ts.ctime(), log_type, msg)
 
 def get_ip():
+    """Generate a random IP address for attack vector."""
     max = 4294967295
     return socket.inet_ntoa(struct.pack('>L', socket.ntohl(random.randrange(1,max))))
 
-def scan_ip(ip):
-    max = 15 
-    p = ProgressMeter(total=max)
+def scan_ip(ip, max=15):
+    """
+    Scans an IP. Detects and returns a set of open ports.
+    """
+    # Update progress with the fancy bar!
+    msg = 'SCANNING'
+    progress = ProgressMeter(message=msg, total=max)
     while max >= 0:
-        p.update(1)
+        progress.update(1)
         max -= 1
         time.sleep(random.random())
+
+    # Sleep randomly to throw off our victim!
     time.sleep(random.random())
-    open_ports = random.randrange(0,
-            random.randrange(1,25))
+    open_ports = random.randrange(0, random.randrange(1,25))
+
+    # Retun if 
     if not open_ports:
         return None
-    cnt = 0
-    ret = {}
+
+    # Collect open ports. Keep going til we get max # unique.
+    portset = set()
     while True:
+        cnt = len(portset)
         if cnt >= open_ports: 
             break
-        num = random.randrange(0,65535)
-        if not ret.has_key(num):
-            ret[num] = 1 
-            cnt += 1
-    return ret.keys()
+        portnum = random.randrange(0,65535)
+        portset.add(portnum)
+
+    return portset
     
 def check_for_feds():
     num_a = random.randrange(1, 4)
     num_b = random.randrange(1, 4)
 
-    if num_a == num_b:
-        return True 
-
-    return False
+    return num_a == num_b
     
 def ping_ip(ip):
+    """Pings an IP, duh. Sleeps randomly if it fails. Duh."""
     n = random.randrange(0,4)
     if not n:
         time.sleep(random.random())
         return False
     return True
 
-def hack_port(ip, port):
-    max = 5
-    p = ProgressMeter(total=max)
+def hack_port(max=5):
+    """Hacks a ping on IP:port. Serious business."""
+    msg = 'HACKING'
+    progress = ProgressMeter(message=msg, total=max)
     while max >= 0:
-        p.update(1)
+        progress.update(1)
         max -= 1
         time.sleep(random.random())
 
     return random.randrange(0, 2)
     
 def kill_fed():
-    kill_method = [ 'PING TIMED OUT',
-                    'SHOT DOWN BY NORTH KOREA',
-                    'EXPOSED BY WIKILEAKS',
-                    'CALL TRACED AND EXPLODED',
-                    'BLUESCREENED BY OVERHACK IDS LOCKING',
-                    'TALK SESSION TERMINATED',
-                    'ACCOUNT REMOVED BY COMPUSERVE',
-                    'FIREWALLED FROM EGYPT'] 
-    return kill_method[random.randrange(0, len(kill_method))]
+    """Kills a Fed. Dope!"""
+    return random.choice(KILL_METHODS)
 
 def covert_action():
-    action = [  'CALLING TAFT', 
-                'LOGGING OFF IRC', 
-                'MOVING FUNDS INTO SWISS BANK ACCOUNT', 
-                'GAINING EYE OF THE TIGER', 
-                'REBOOTING ROUTERS', 
-                'USING PGP', 
-                'HIDING', 
-                'UPLOADING SPACE JAM', 
-                'EMPTYING TRASHCAN', 
-                'SENDING MSG_OOB', 
-                'CALCULATING SENDMAIL AXIS',
-                'MOUNTING FILESYSTEM READONLY']
-
-    return action[random.randrange(0, len(action))]
+    """Determine a covert action! Secret Squirrel."""
+    return random.choice(ACTIONS)
                 
 def find_fed():
-    feds = ['FBI', 'CIA', 'RIAA', 'AOL', 'SWEDEN', 'MADD', 'UUNET', 'NAMBLA', 'WALMART', 'PETA']
+    """Retrieve a Fed to be killed later. Hopefully."""
+    return random.choice(FEDS)
 
-    return feds[random.randrange(0, len(feds))]
+def hack(ip):
+    """
+    Hacks an Internet IP. Use with caution!!
+    """
+    # So we can tell each hack apart
+    print 
+    log("Finding Internet target...")
+    log("`- Found Internet target %s BEGIN INTERNET HACKING!" % ip)
 
+    # Try to hack a ping!
+    log('| `- HACKING PING ON TARGET: %s' % ip)
+    if not ping_ip(ip):
+        log('| `- COULD NOT HACK A PING ON TARGET %s' % ip)
+        return
+
+    # Try to hack a scan!
+    log('| | `- ATTEMPTING HACKING SCAN OF INTERNET PORTS ON TARGET %s' % ip)
+    ports = scan_ip(ip)
+    if not ports:
+        log('| | `- COULD NOT HACK INTERNET IP %s (NO HACKER SLOTS OPEN)' % ip)
+        return
+
+    # Ok we're ready to hack!
+    log('| | `- %d INTERNET PORTS ON %s THAT MAY BE INTERNET HACKABLE!1!!1' % (len(ports), ip))
+    log('| | `- BEGNINNING INTERNET HACKING OF PORTS ON %s' % (ip))
+
+    # Iterate ports and go to town!!
+    for port in ports:
+        # Let's get a service and choose the right hacker method
+        method, service = detect_service()
+        log('| | | `- SERVICE DETECTED: %s on port %d' % (service, port))
+        log('| | | `- HACKER METHOD: %s' % method)
+        log('| | | `- Attempting TCP hacking of port %d on host %s' % (port, ip)) 
+
+        # Aww yeah we got one!
+        if hack_port():
+            log('| | | | `- %s:%d WAS SUCCESSFULLY INTERNET HACKERED!' % (ip, port))
+            log('| | | | `-    ___                 _____     _ ')
+            log('| | | | `-   / _ \__      ___ __ |___ /  __| |')
+            log("| | | | `-  | | | \ \ /\ / / '_ \  |_ \ / _` |") 
+            log('| | | | `-  | |_| |\ V  V /| | | |___) | (_| |')
+            log('| | | | `-   \___/  \_/\_/ |_| |_|____/ \__,_|')
+            log('| | | |')
+            return
+
+        # Or not (sad face)
+        else:
+            log('| | | | `- %s:%d COULD NOT BE TCP INTERNET HACKED!' % (ip, port))
+
+        # Beware of feds!!
+        if check_for_feds():
+            fed = find_fed()
+            action = covert_action()
+            how  = kill_fed() # Serious business.
+                
+            # FUCK!!!
+            log( '| | | | `- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            log( '| | | | `- ! WARNING WARNING WARNING WARNING WARNING WARNING WARNING !')
+            log( '| | | | `- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+            log( '| | | | `- DETECTED %s MONITORING OUR HACKING, ATTEMPTING COVERT ACTIONS!' % fed) 
+            log( '| | | | | `- %s...' % action)
+            hack_port()
+            log( '| | | | | `- ZOOMING IN...') 
+            hack_port()
+            log( '| | | | | `- ENHANCING...')
+            hack_port()
+
+            # Whew!
+            log( '| | | | | `- %s %s!!!!!' % (fed, how))
+
+def main():
+    """So elegant."""
+    print BANNER
+
+    while True:
+        ip = get_ip()
+        hack(ip)
 
 if __name__ == '__main__':
-
-    banner = """
- ___ _   _ _____ _____ ____  _   _ _____ _____ 
-|_ _| \ | |_   _| ____|  _ \| \ | | ____|_   _|
- | ||  \| | | | |  _| | |_) |  \| |  _|   | |  
- | || |\  | | | | |___|  _ <| |\  | |___  | |  
-|___|_| \_| |_| |_____|_| \_\_| \_|_____| |_|  
-                                               
- _   _    _    __  _____  ____  
-| | | |  / \   \ \/ / _ \|  _ \ 
-| |_| | / _ \   \  / | | | |_) |
-|  _  |/ ___ \  /  \ |_| |  _ < 
-|_| |_/_/   \_\/_/\_\___/|_| \_\
-
-VERSION 1.1 BY MR DA PLAGUE!
-    """
-
-    owned = """
-  ___                 _____     _ 
- / _ \__      ___ __ |___ /  __| |
-| | | \ \ /\ / / '_ \  |_ \ / _` |
-| |_| |\ V  V /| | | |___) | (_| |
- \___/  \_/\_/ |_| |_|____/ \__,_|
-    """
-    
-    print banner
-    while True:
-        print ''
-        log('HACKING INTERNET',"finding internet target...")
-        ip = get_ip()
-        log('HACKING INTERNET',"`- found internet target %s BEGIN INTERNET HACKING!" % ip)
-        log('HACKING INTERNET','| `-  HACKING PING ON TARGET %s' % ip)
-        if not ping_ip(ip):
-            log('HACKING INTERNET','| `-  COULD NOT HACK A PING ON TARGET %s' % ip)
-            continue
-        log('HACKING INTERNET','| | `-  ATTEMPTING HACKING SCAN OF INTERNET PORTS ON TARGET %s' % ip)
-        ports = scan_ip(ip)
-        if not ports:
-            log('HACKING INTERNET','| | `-  COULD NOT HACK INTERNET IP %s (NO HACKER SLOTS OPEN)' % ip)
-            continue
-        log('HACKING INTERNET','| | `-  %d INTERNET PORTS ON %s THAT MAY BE INTERNET HACKABLE!1!!1' % \
-            (len(ports), ip))
-        log('HACKING INTERNET','| | `-  BEGNINNING INTERNET HACKING OF PORTS ON %s' % (ip))
-        for port in ports:
-            (method,service) = detect_service(ip,port)
-            log('HACKING INTERNET', '| | | `-   DETECTED SERVICE %s on %d using HACKER METHOD: %s' % (service, port, method))
-            log('HACKING INTERNET', '| | | `-   Attempting Transmission Control Protocol hacking of' \
-                ' port %d on host %s' % (port, ip)) 
-            if hack_port(ip, port):
-                log('HACKING INTERNET', '| | | | `-  %s:%d WAS SUCCESSFULLY INTERNET HACKERED!' % (ip, port))
-                log('HACKING INTERNET', '| | | | `-     ___                 _____     _')
-                log('HACKING INTERNET', '| | | | `-    / _ \__      ___ __ |___ /  __| |')
-                log('HACKING INTERNET', '| | | | `-   | | | \ \ /\ / / \'_ \  |_ \ / _` |') 
-                log('HACKING INTERNET', '| | | | `-   | |_| |\ V  V /| | | |___) | (_| |')
-                log('HACKING INTERNET', '| | | | `-    \___/  \_/\_/ |_| |_|____/ \__,_|')
-                log('HACKING INTERNET', '| | | |')
-                # print owned
-                continue
-            else:
-                log('HACKING INTERNET', '| | | | `-  %s:%d COULD NOT BE TCP INTERNET HACKED!' % (ip, port))
-
-            if check_for_feds() == True:
-                fed    = find_fed()
-                action = covert_action()
-                how    = kill_fed()
-                
-                log('HACKING INTERNET', '| | | | `- **************************************************************')
-                log('HACKING INTERNET', '| | | | `- * WARNING WARNING WARNING WARNING WARNING WARNING WARNING WA *')
-                log('HACKING INTERNET', '| | | | `- **************************************************************')
-                log('HACKING INTERNET', '| | | | `- DETECTED %s MONITORING OUR HACKING, ATTEMPTING COVERT ACTIONS!' % fed) 
-                log('HACKING INTERNET', '| | | | | `-  %s...' % action)
-                hack_port(1, 1)
-                log('HACKING INTERNET', '| | | | | `-  ZOOMING IN...') 
-                hack_port(1, 1)
-                log('HACKING INTERNET', '| | | | | `-  ENHANCING...')
-                hack_port(1, 1)
-                log('HACKING INTERNET', '| | | | | `-  %s %s!!!!!' % (fed, how))
-
-
+    main()
