@@ -9,7 +9,6 @@ __version__ = '1.5'
 __author__ = 'MR DA PLAGUE'
 
 import datetime
-import math
 import socket
 import struct
 import random
