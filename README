@@ -1,0 +1,32 @@
+!!! PRIVATE INTERNET HACKER, DO NOT DISTRIBUTE !!!
+!!!      THIS SHIT WILL HACK EVERYTHING        !!! 
+!!!       E.G., I.E., HACK THE PLANET          !!!
+!!!                                            !!!  
+!!! .TEXT                                      !!!
+!!!  .GLOBL __OPTIMIZED_0DAY_DISPLAY           !!!
+!!!  _OPTIMIZED_0DAY_DISPLAY:                  !!!
+!!!       PUSH   EBP                           !!!
+!!!       MOV    EBP,       ESP                !!!
+!!!       SUB    ESP,       0X18               !!!
+!!!       MOVB   [EBP-0X9], 0X0                !!!
+!!!       JMP    _OMGZ                         !!!
+!!!  _LOL:                                     !!!
+!!!       MOVB   [EBP-0XA],0X0                 !!!
+!!!       INCB   BYTE PTR [EBP-0X9]            !!!
+!!!  _OMGZ:                                    !!!
+!!!       CMPB   [EBP-0X9],0X9                 !!!
+!!!       JBE    _LOL                          !!!
+!!!       LEAVE                                !!!
+!!!       RET                                  !!!
+!!!                                            !!!  
+!!! THIS INTERNET HACKER EVEN DETECTS IF A FED !!!
+!!! HAS STARTED TO MONITOR YOUR HACKING PORTS, !!!
+!!! THEN IT DOES LIKE, SOMETHING TO KILL THEM  !!! 
+!!!                                            !!!
+!!! YOU CAN STOP ONE OF US, BUT YOU WILL NEVER !!!
+!!! STOP US ALL.  WE ARE THE BIT  AND THE BAUD !!!
+!!! AND THIS IS OUR MANIFESTO, BITCHES!        !!!
+!!!                                            !!! 
+!!!    GREETZ:  #!ADM #!W00W00 #!FURRIES       !!!
+!!!             DUKE_ VACUUM GOBBLEZ PHC       !!!
+!!!             KEVIN-MITNICK(LOLOL J/K)       !!!
