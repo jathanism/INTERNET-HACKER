@@ -1,6 +1,6 @@
-./0-day/sendmail/*
-./0-day/openssh/*
-./0-day/apache/*
-./0-day/windows7/*
-./0-day/windowsxp/*
-./0-day/bitchslap.exe
+0-day/sendmail/
+0-day/openssh/
+0-day/apache/
+0-day/windows7/
+0-day/windowsxp/
+0-day/bitchslap.exe
