@@ -5,7 +5,7 @@
 # MR DA PLAGUE <sOcKeT@GmAiL.CoM>
 # MINICOM <JaTHaN@gGMaiL.CoM>
 
-__version__ = '1.5'
+__version__ = '1.7'
 __author__ = 'MR DA PLAGUE'
 
 import datetime
@@ -19,8 +19,7 @@ import sys
 ################
 # Hacking Type #
 ################
-#LOG_TYPE = 'HACKING INTERNET'
-LOG_TYPE = 'HAXORING'
+LOG_TYPE = 'H4XORING'
 
 ##################
 # Attack Methods #
@@ -43,6 +42,16 @@ METHOD_PRE = (
     'satellite',
     'multiprocessing',
     'multithreaded',
+    'redonkulous',
+    'flapjacked',
+    'fluffer-nuttered',
+    'thugged-out',
+    'reticulated',
+    'hilariating',
+    'pussywhipped',
+    'bamboozling',
+    "poppin'",
+    'polysyllabic',
 )
 # These should be "business" words 
 METHOD_MID = (
@@ -56,12 +65,17 @@ METHOD_MID = (
     'policy',
     'incremental'
     'cloud',
+    'pygmy',
     'webscale',
     'mapreduced',
+    'digimatized',
+    'anti-depressant',
 )
 # These should be "action" words"
 METHOD_END = (
     'recon',
+    'thrombosifier',
+    'penetration',
     'detection',
     'lookup',
     'scan-method',
@@ -70,7 +84,13 @@ METHOD_END = (
     'junk-punch',
     'hooker',
     'probulator',
+    'jiggery-pokery',
     'finglonger',
+    'rumination',
+    'infrastructure',
+    'ballpuncher',
+    'emulsifier',
+    'entanglement',
 )
 
 #################
@@ -84,8 +104,12 @@ SERVICE_PRE = (
     'web',
     'ftp',
     'xml',
+    'jsonp',
     'cloud',
     'amazon',
+    'twitter',
+    'facebook',
+    'gijoe',
     'ebay',
     'google'
 )
@@ -95,8 +119,13 @@ SERVICE_END = (
     'sucker',
     'apache',
     'napster',
+    'catholic',
+    'honey badger',
+    'wolverine',
+    'horsefly',
     'fungus',
     'meat',
+    'teste',
 )
 
 ################
@@ -104,7 +133,9 @@ SERVICE_END = (
 ################
 ACTIONS = (
     'CALLING TAFT',
+    ' >>> FIREWALL 60% GONE >>> ',
     'LOGGING OFF IRC',
+    'EXPLODING ARRAYS',
     'MOVING FUNDS INTO SWISS BANK ACCOUNT',
     'GAINING EYE OF THE TIGER',
     'REBOOTING ROUTERS',
@@ -116,6 +147,13 @@ ACTIONS = (
     'CALCULATING SENDMAIL AXIS',
     'MOUNTING FILESYSTEM READONLY',
     'RETICULATING SPLINES',
+    'SELF-DESTRUCT ACTIVATED',
+    'ACTIVATING SPAMJACULATOR',
+    'DELIVERING MERCHANDISE',
+    'DROPPING MAD SCIENCE',
+    'CALCULATING',
+    'REBOOTING',
+    'LIQUIDATING ALL ASSETS',
 )
 
 #############
@@ -135,7 +173,16 @@ FEDS = (
     'PETA',
     'MPAA',
     'CERN',
-    'NWA'
+    'NWA',
+    'CERN',
+    'KKK',
+    '3H',
+    'NASA',
+    'KGB',
+    'NCAA',
+    'ACLU',
+    'NRA',
+    'SCIENTOLOGY',
 )
 
 ################
@@ -153,6 +200,10 @@ KILL_METHODS = (
     'CONNECTION TIMED OUT',
     'FIREWALL 60% GONE',
     'HACKED BY CHINESE',
+    'NETWORK OVERLOADED',
+    'GAME OVER',
+    'YOU LOSE',
+    'FATALITIY',
 )
 
 ###########
