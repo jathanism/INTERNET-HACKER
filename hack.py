@@ -63,7 +63,7 @@ METHOD_MID = (
     'penetrated',
     'godzilla',
     'policy',
-    'incremental'
+    'incremental',
     'cloud',
     'pygmy',
     'webscale',
